@@ -1,0 +1,25 @@
+# ---- ENVIRONMENT ----
+.env
+.env.*
+!.env.example
+
+# ---- PYTHON ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# ---- VENV ----
+venv/
+env/
+.venv/
+ENV/
+
+# ---- EDITOR / IDE ----
+.vscode/
+.idea/
+*.code-workspace
+
+# ---- SYSTEM FILES ----
+Thumbs.db

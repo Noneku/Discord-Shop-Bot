@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Discord Bot Token
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 
 # API Configuration
 API_URL= os.getenv('API_URL')

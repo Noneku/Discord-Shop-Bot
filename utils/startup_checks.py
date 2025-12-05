@@ -1,4 +1,6 @@
 from utils.logger import get_logger
+from config.settings import DISCORD_BOT_TOKEN
+import requests
 
 logger = get_logger("startup")
 
@@ -9,20 +11,25 @@ logger = get_logger("startup")
 
 def check_env_variables():
     logger.info("Vérification des variables d'environnement...")
-    # 👉 À compléter
-    return True  # Remplace par False si échec
 
-
-def check_internet():
-    logger.info("Vérification de la connexion Internet...")
-    # 👉 À compléter
+    if not DISCORD_BOT_TOKEN:
+        logger.error("❌ DISCORD_BOT_TOKEN est manquant dans le fichier .env.")
+        return False
+    
+    logger.info("✔ Variables d'environnement OK.")
     return True
-
 
 def check_api_access(api_url: str):
     logger.info(f"Test de connexion à l'API : {api_url}")
-    # 👉 À compléter
-    return True
+    
+    try:
+        response = requests.get(api_url, timeout=5)
+        if response.status_code == 200:
+            logger.info("✔ Accès à l'API réussi.")
+            return True
+    except requests.RequestException as e:
+        logger.error(f"❌ Échec de la connexion à l'API : {e}")
+        return False
 
 
 def check_required_files():
@@ -59,7 +66,6 @@ def run_startup_checks(api_url=None, intents=None):
         check_python_version(),
         check_env_variables(),
         check_required_files(),
-        check_internet()
     ]
 
     if api_url:

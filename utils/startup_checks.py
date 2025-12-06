@@ -23,16 +23,11 @@ def check_env_variables():
 # Vérification de l'accès API
 # --------------------------------------------------
 def check_api_access():
-    logger.info(f"Test de connexion à l'API : {Settings.api_url()}")
-
     try:
         response = requests.get(Settings.api_url(), timeout=5)
         if response.status_code == 200:
             logger.info("✔ Accès à l'API réussi.")
             return True
-
-        logger.error(f"❌ Code inattendu retourné par l'API : {response.status_code}")
-        return False
 
     except requests.RequestException as e:
         logger.error(f"❌ Impossible de contacter l'API : {e}")
